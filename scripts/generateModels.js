@@ -34,6 +34,7 @@ function generateFromUrl() {
       data += chunk;
     });
     res.on("end", function() {
+      //fs.writeFileSync(path.join("scripts", "swaggerLast.json"), jsonStr);
       generate(data);
     });
   });
@@ -147,7 +148,7 @@ function getFromJsonProperty(name, property) {
 function getToJsonProperty(name, property) {
   var camelCased = toLowerFirstLetter(toCamelCase(name));
   var type = getVariableType(property.items || property);
-  return `'${camelCased}' : convertToJson(${camelCased}, '${type}')`;
+  return `'${name}' : convertToJson(${camelCased}, '${type}')`;
 }
 
 function getVariableType(property) {
